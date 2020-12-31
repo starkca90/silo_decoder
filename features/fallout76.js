@@ -77,16 +77,16 @@ module.exports = function (controller) {
 
             try {
                 // Validate the required pieces were entered
-                assert(keyword)
-                assert(codes)
-                assert(codes.length === 8)
+                assert(keyword, "Keyword Missing")
+                assert(codes, "Codes Completely Missing")
+                assert(codes.length === 8, "One or more codes missing")
 
                 // Ensure we have potentially valid code pieces
                 codes.forEach(code => {
-                    assert(code)
-                    assert(code.length === 2)
-                    assert(code[0].match(/[a-z]/i))
-                    assert(code[1].match(/[0-9]/i))
+                    assert(code, "A code piece is blank")
+                    assert(code.length === 2, "A code piece is not exactly two characters " + code)
+                    assert(code[0].match(/[a-z]/i), "A code piece alpha component is not alpha " + code)
+                    assert(code[1].match(/[0-9]/i), "A code piece numeric component is not numeric " + code)
                 })
 
                 // Scrambled version of decoded message
@@ -173,7 +173,7 @@ module.exports = function (controller) {
                 console.error("Codes: " + message.value.code)
 
                 // Get the fallout card template from the card library
-                let cardTemplate = new ACData.Template(cards['fallout_other'])
+                let cardTemplate = new ACData.Template(cards['fallout_error'])
 
                 // Fill in the card template
                 // TODO: Possible multiple language support???
@@ -181,7 +181,8 @@ module.exports = function (controller) {
                     $root: {
                         "version": "1.0.0",
                         "title": "Fallout76 Silo Decoder",
-                        "description": "An error has occurred, please check you entered the correct keyword and code pieces."
+                        "description": "An error has occurred, please check you entered the correct keyword and code pieces.",
+                        "error": err.message
                     }
                 })
 
