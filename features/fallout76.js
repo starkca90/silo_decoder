@@ -55,7 +55,7 @@ module.exports = function (controller) {
                 "getting_started_title": "Getting Started",
                 "getting_started": "Request the entry card by sending me the *fallout* command",
                 "error_title": "Errors",
-                "error": "Errors are inevitable, if I run into run, I will try to help narrow down the issue, but no promises. Things to check include:",
+                "error": "Errors are inevitable, if I run into one, I will try to help narrow down the issue, but no promises. Things to check include:",
                 "error_checks": "- The Correct Silo Keyword is entered (from the printer)\n - All 8 Code fragments from the right silo is entered properly\n - The Keyword and/or code fragments are from the same week"
             }
         })
