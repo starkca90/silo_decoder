@@ -34,13 +34,22 @@ module.exports = function (controller) {
     controller.on('attachmentActions', async (bot, message) => {
         if (message.value.card === 'fallout') {
             console.log('fallout card returned')
+            let keyword = message.value.keyword.toLowerCase()
+            let codes = message.value.code.toLowerCase().split(';')
 
             try {
-                let keyword = message.value.keyword.toLowerCase()
+                // Validate the required pieces were entered
                 assert(keyword)
-
-                let codes = message.value.code.toLowerCase().split(';')
                 assert(codes)
+                assert(codes.length === 8)
+
+                // Ensure we have potentially valid code pieces
+                codes.forEach(code => {
+                    assert(code)
+                    assert(code.length === 2)
+                    assert(code[0].match(/[a-z]/i))
+                    assert(code[1].match(/[0-9]/i))
+                })
 
                 // Scrambled version of decoded message
                 let decodedScramble = ''
@@ -81,6 +90,9 @@ module.exports = function (controller) {
 
                 // Iterate through each possible word and make a word:code pair dictionary
                 matches.forEach(element => {
+                    // Unscramble returns ["No results found."] when not results are found, make sure we don't have that
+                    assert(element.indexOf(" ") === -1)
+
                     // Hold the assembled launch code
                     let launchCode = ''
 
@@ -118,7 +130,26 @@ module.exports = function (controller) {
 
 
             } catch (err) {
-                console.log(err)
+                console.error(err)
+                console.log("Keyword: " + keyword)
+                // Get the fallout card template from the card library
+                let cardTemplate = new ACData.Template(cards['fallout_other'])
+
+                // Fill in the card template
+                // TODO: Possible multiple language support???
+                let cardPayload = cardTemplate.expand({
+                    $root: {
+                        "version": "1.0.0",
+                        "title": "Fallout76 Silo Decoder",
+                        "description": "An error has occurred, please check you entered the correct keyword and code pieces."
+                    }
+                })
+
+                // Send the card out to the requester
+                await bot.reply(message, {
+                    text: "Cards are not supported on this platform yet",
+                    attachments: cardPayload
+                })
             }
         }
     })
