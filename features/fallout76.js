@@ -114,7 +114,7 @@ module.exports = function (controller) {
                     let char = element.substr(0, 1)
                     // Find the index of the letter in the "modified" alphabet
                     let index = alpha.indexOf(char)
-                    // Get the current of the previously found index from the "clean" alpahabet
+                    // Get the current of the previously found index from the "clean" alphabet
                     char = cleanAlpha.substr(index, 1)
                     // Form a string of the decoded characters
                     decodedScramble += char
@@ -129,7 +129,7 @@ module.exports = function (controller) {
                 // Iterate through each possible word and make a word:code pair dictionary
                 matches.forEach(element => {
                     // Unscramble returns ["No results found."] when not results are found, make sure we don't have that
-                    assert(element.indexOf(" ") === -1)
+                    assert(element.indexOf(" ") === -1, "Unable to find an unscrambled word, check that the keyword and codes are for the same silo and the same week")
 
                     // Hold the assembled launch code
                     let launchCode = ''
