@@ -1,0 +1,19 @@
+{
+  "name": "botkit-silo_decoder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "test": "echo \"Error: no test specified\""
+  },
+  "dependencies": {
+    "botbuilder-adapter-webex": "^1.0.9",
+    "botbuilder-storage-mongodb": "^0.9.5",
+    "botkit": "^4.10.0",
+    "botkit-plugin-cms": "^1.0.3",
+    "dotenv": "^7.0.0",
+    "adaptivecards-templating": "^1.4.0",
+    "unscramble": "^0.0.1-v"
+  }
+}
