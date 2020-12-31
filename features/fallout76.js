@@ -5,7 +5,7 @@ const unscramble = require('unscramble')
 
 module.exports = function (controller) {
 
-    controller.hears(async (message) => message.text && message.text.toLowerCase() === 'fallout', ['message'], async (bot, message) => {
+    controller.hears(async (message) => message.text && message.text.toLowerCase() === 'fallout', ['message', 'direct_message'], async (bot, message) => {
         // Get the fallout card template from the card library
         let cardTemplate = new ACData.Template(cards['fallout_entry'])
 
