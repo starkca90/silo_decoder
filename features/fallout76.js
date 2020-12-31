@@ -131,7 +131,9 @@ module.exports = function (controller) {
 
             } catch (err) {
                 console.error(err)
-                console.log("Keyword: " + keyword)
+                console.error("Keyword: " + message.value.keyword)
+                console.error("Codes: " + message.value.code)
+
                 // Get the fallout card template from the card library
                 let cardTemplate = new ACData.Template(cards['fallout_other'])
 
