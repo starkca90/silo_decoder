@@ -13,7 +13,7 @@
     "botkit": "^4.10.0",
     "botkit-plugin-cms": "^1.0.3",
     "dotenv": "^8.2.0",
-    "adaptivecards-templating": "^1.4.0",
+    "adaptivecards-templating": "^2.1.0",
     "unscramble": "^0.0.1-v"
   }
 }
